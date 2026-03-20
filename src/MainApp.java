@@ -122,7 +122,7 @@ class StudentRegistrationFrame extends JFrame {
         //mainPanel.setBackground(Color.WHITE); // Set background color for contrast
         //mainPanel.setBackground(new Color(235, 218, 171));
         Color bgColor = new Color(235, 218, 171);
-        mainPanel.setBackground(bgColor);
+        mainPanel.setBackground(Color.WHITE);
         mainPanel.setOpaque(true);
         
 
@@ -158,7 +158,7 @@ class StudentRegistrationFrame extends JFrame {
 
         // Panel for radio buttons
         JPanel genderPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 0));
-        genderPanel.setBackground(bgColor); // Match main panel background
+        genderPanel.setBackground(Color.WHITE); 
         genderPanel.setOpaque(true);
 
         // Create radio buttons
@@ -211,14 +211,14 @@ class StudentRegistrationFrame extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        panel.setBackground(new Color(235, 218, 171));
+        panel.setBackground(Color.WHITE);
         panel.setOpaque(true);
 
         // SAVE BUTTON: Saves student data to database
         JButton saveButton = new JButton("Save");
         saveButton.addActionListener(e -> handleSave());
         saveButton.setBackground(new Color(119, 221, 119));
-        saveButton.setForeground(Color.WHITE);
+        saveButton.setForeground(Color.BLACK);
         saveButton.setFocusPainted(false);
         saveButton.setFont(new Font("Sanserif", Font.BOLD, 14));
         saveButton.setBorderPainted(false); // Remove outline
@@ -232,7 +232,7 @@ class StudentRegistrationFrame extends JFrame {
         JButton clearButton = new JButton("Clear");
         clearButton.addActionListener(e -> handleClear());
         clearButton.setBackground(new Color(255, 239, 153));
-        clearButton.setForeground(Color.WHITE);
+        clearButton.setForeground(Color.BLACK);
         clearButton.setFocusPainted(false);
         clearButton.setFont(new Font("Sanserif", Font.BOLD, 14));
         clearButton.setBorderPainted(false); // Remove outline
@@ -244,7 +244,7 @@ class StudentRegistrationFrame extends JFrame {
         JButton exitButton = new JButton("Exit");
         exitButton.addActionListener(e -> System.exit(0));
         exitButton.setBackground(new Color(255, 153, 153));
-        exitButton.setForeground(Color.WHITE);
+        exitButton.setForeground(Color.BLACK);
         exitButton.setFont(new Font("Sanserif", Font.BOLD, 14));
         exitButton.setFocusPainted(false);
         exitButton.setBorderPainted(false); // Remove outline
