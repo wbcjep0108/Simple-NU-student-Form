@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.sql.*; // ← Add this for PostgreSQL
+import java.sql.*; // For PostgreSQL. But optional since this activity is for gui only.
 
 // Custom rounded border class for buttons
 class RoundedBorder extends javax.swing.border.AbstractBorder {
@@ -99,7 +99,7 @@ class StudentRegistrationFrame extends JFrame {
     title.setForeground(Color.BLACK);
     panel.add(title, BorderLayout.WEST);
 
-    // Logo on the right, scaled smaller
+    // Logo on the right
     ImageIcon logo = new ImageIcon("nulogo.png");
     Image scaledLogo = logo.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH); // smaller size
     JLabel logoLabel = new JLabel(new ImageIcon(scaledLogo));
@@ -113,18 +113,31 @@ class StudentRegistrationFrame extends JFrame {
      * - Uses BorderLayout for the main panel
      * - Contains GridLayout (5 rows x 2 columns) for organized input fields
      * - Includes: ID Number, Name, Course, Gender (radio buttons), and Year (dropdown)
+     * - Background image (nubg.png) with transparency overlay
      * - Used in BorderLayout.CENTER position
      */
     private JPanel createMainPanel() {
-        JPanel mainPanel = new JPanel();
+        // Custom JPanel with background image
+        JPanel mainPanel = new JPanel() {
+            private ImageIcon backgroundImage = new ImageIcon("nubg.png");
+            
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                if (backgroundImage.getImage() != null) {
+                    // Draw background image scaled to panel size
+                    g.drawImage(backgroundImage.getImage(), 0, 0, getWidth(), getHeight(), this);
+                    // Add semi-transparent white overlay for readability
+                    Graphics2D g2 = (Graphics2D) g;
+                    g2.setColor(new Color(255, 255, 255, 180)); // White with 70% opacity
+                    g2.fillRect(0, 0, getWidth(), getHeight());
+                }
+            }
+        };
+        
         mainPanel.setLayout(new BorderLayout());
         mainPanel.setBorder(BorderFactory.createEmptyBorder(0, 20, 10, 20));
-        //mainPanel.setBackground(Color.WHITE); // Set background color for contrast
-        //mainPanel.setBackground(new Color(235, 218, 171));
-        Color bgColor = new Color(235, 218, 171);
-        mainPanel.setBackground(Color.WHITE);
         mainPanel.setOpaque(true);
-        
 
         // Grid panel for aligning labels and input fields in rows
         JPanel fieldsPanel = new JPanel();
@@ -136,7 +149,7 @@ class StudentRegistrationFrame extends JFrame {
         fieldsPanel.add(new JLabel("ID Number:"));
         idNumberField = createRoundedTextField();
         idNumberField.setFont(new Font("SansSerif", Font.PLAIN, 13));
-        idNumberField.setForeground(new Color(80, 80, 80)); // soft gray
+        idNumberField.setForeground(new Color(80, 80, 80)); 
         fieldsPanel.add(idNumberField);
 
         // INPUT FIELD: Student Name
@@ -202,10 +215,7 @@ class StudentRegistrationFrame extends JFrame {
     }
 
     /**
-     * BUTTON PANEL DESIGN: Creates the bottom action buttons section
-     * - Uses FlowLayout centered with 10px spacing between buttons
-     * - Contains three buttons: Save, Clear, and Exit
-     * - Used in BorderLayout.SOUTH position
+     * BUTTON PANEL DESIGN
      */
     private JPanel createButtonPanel() {
         JPanel panel = new JPanel();
